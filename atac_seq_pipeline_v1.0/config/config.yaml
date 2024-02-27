@@ -1,0 +1,89 @@
+version: v.1.0.0
+date: 2023.09.06
+author: Sijian Xia
+
+
+software:
+  fastqc: "/home/sjxia/miniconda3/envs/chip_seq/bin/fastqc"
+  fastp: "/lustre/software/anaconda/anaconda3-2019.10-py37/envs/fastp-0.20.0/bin/fastp"
+  trim_galore: "/lustre/home/sjxia/02_software/TrimGalore-0.6.10/trim_galore"
+  samtools: "/lustre/home/sjxia/.conda/envs/samtools_env/bin/samtools"
+  bowtie2: "/lustre/home/sjxia/.conda/envs/mcc_env/bin/bowtie2"
+  picard: "/lustre/home/sjxia/.conda/envs/chipseq_env/bin/picard"
+  macs2: "/lustre/home/sjxia/.conda/envs/chipseq_env/bin/macs2"
+  sambamba: "/lustre/home/sjxia/.conda/envs/chipseq_env/bin/sambamba"
+  bedGraphToBigWig: /home/sjxia/unbuntu/01_soft/bedGraphToBigWig
+  wigToBigWig: /home/sjxia/unbuntu/01_soft/wigToBigWig
+  bigWigToBedGraph: /home/sjxia/unbuntu/01_soft/bigWigToBedGraph
+  bedtools: /home/sjxia/miniconda3/envs/chip_seq/bin/bedtools
+
+conda_env:
+  chipseq_env: "/lustre/home/sjxia/.conda/envs/chipseq_env"
+  mcc_env: "/lustre/home/sjxia/.conda/envs/mcc_env"
+  deeptools_env: "/lustre/home/sjxia/.conda/envs/deeptools_env"
+
+##############################################################################
+## software setting
+##############################################################################
+trim_galore_para:
+  threads: 2
+  quality_cutoff: 15
+  minReadLength: 40
+  adapter1: ""
+  adapter2: ""
+
+fastp_para:
+  quality: 30
+  filt_read_length: 30 
+  threads: 8
+
+bowtie2_para:
+  # mode: "--local"
+  # sensitivity:  "--very-sensitive-local"
+  # max_fragment_len: "--maxins 500"                # maximum fragment length for valid paired-end alignments
+  # min_fragment_len: "--minins 80"                 # minimum fragment length for valid paired-end alignments
+  index: "-x /lustre/home/sjxia/04_ref_by_species/ucsc/hg19/index/bowtie2/hg19"
+
+samtools_para:
+  threads: 8
+
+picard_para:
+  pca_rm: "--REMOVE_DUPLICATES true"
+    
+
+# macs2 Parameters:
+          # for information over macs2, refer to https://github.com/taoliu/MACS
+          # regular peak calling : macs2 callpeak -t ChIP.bam -c Control.bam -f BAM -g hs -n test -B -q 0.01
+          # broad peak calling : macs2 callpeak -t ChIP.bam -c Control.bam --broad -g hs --broad-cutoff 0.1
+macs2_para:
+  # Effective genome size. It can be 1.0e+9 or 1000000000,or shortcuts:'hs' for human (2.7e9), 
+  # 'mm' for mouse (1.87e9)
+  genomesize: "--gsize hs"
+  format: "--format BAMPE"        #Use BAMPE to activate the paired end data, MACS will use the actual insert size of pairs of reads to build the fragemnt pileup.
+  qvalue: "0.05"                  #default is 0.05
+  set1:
+    para: "--nomodel --shift 37 --extsize 73 --keep-dup all -B --SPMR --call-summits "
+  set2:
+    para: "--nomodel --shift 37 --extsize 73 --keep-dup all -B --SPMR"
+  set3:
+    para: "--nomodel --shift 37 --extsize 73 --keep-dup all -B --SPMR --call-summits -q 0.02"
+  set4:
+    para: "--nomodel --shift 100 --extsize 200 --broad"
+  set5:
+    para: "--gsize hs --format BAM --nomodel --shift 37 --extsize 73 --keep-dup all -B --SPMR --call-summits -q 0.02"
+
+
+deeptools:
+  bamcoverage:
+    set1: "-bs 10 --ignoreDuplicates --normalizeUsing CPM"
+
+##############################################################################
+## run setting
+##############################################################################
+run_para:
+  data_type: "atacseq"
+  data_dir: "/lustre/home/sjxia/03_project/07_micronucleus/atac_seq/gse186585/rawdata"
+  genome: /lustre/home/sjxia/04_ref_by_species/ucsc/hg19/genome/hg19.fa
+  chrom_size: /lustre/home/sjxia/04_ref_by_species/ucsc/hg19/chrom_size/hg19.chrom.sizes
+  annotation_file: /lustre/home/sjxia/04_ref_by_species/ucsc/hg19/anno/gencode.v44lift37.annotation.gtf
+  blacklist: /lustre/home/sjxia/04_ref_by_species/ucsc/hg19/backlist/hg19_backlist.bed
