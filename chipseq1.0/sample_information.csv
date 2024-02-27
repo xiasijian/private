@@ -1,7 +1,0 @@
-experiment,sample,fq1,fq2,condition,group,description
-SRR18274937,Y1,SRR18274937_1.fastq.gz,SRR18274937_2.fastq.gz,IP,Young,Liver ChIP-seq Y1
-SRR18274936,Y2,SRR18274936_1.fastq.gz,SRR18274936_2.fastq.gz,IP,Young,Liver ChIP-seq Y2
-SRR18274935,O1,SRR18274935_1.fastq.gz,SRR18274935_2.fastq.gz,IP,Old,Liver ChIP-seq O1
-SRR18274934,O2,SRR18274934_1.fastq.gz,SRR18274934_2.fastq.gz,IP,Old,Liver ChIP-seq O2
-SRR18274932,Y2,SRR18274932_1.fastq.gz,SRR18274932_2.fastq.gz,Input_control,Young,Liver ChIP-seq input Y2
-SRR18274930,O2,SRR18274930_1.fastq.gz,SRR18274930_2.fastq.gz,Input_control,Old,Liver ChIP-seq input O2
