@@ -1,0 +1,67 @@
+version: V.1.0.0
+date: 2022.07.01
+author: sijian.xia@simceredx.com
+
+########################################################
+#################### environment setting #################
+########################################################
+software:
+    fastqc: "/public3/home/scg8747/02_software/FastQC"
+    fastp: "/public3/home/scg8747/02_software/anaconda3/envs/bulk_rnaseq/bin/fastp"
+    samtools: "/public3/home/scg8747/02_software/anaconda3/envs/samtools/bin/samtools"
+    hisat2: "/public3/home/scg8747/02_software/anaconda3/envs/bulk_rnaseq/bin/hisat2"
+    featureCounts : "/public3/home/scg8747/02_software/anaconda3/envs/bulk_rnaseq/bin/featureCounts"
+    htseq_count: "/public3/home/scg8747/02_software/anaconda3/envs/htseq_count/bin/htseq-count"   
+    RSeQC: "/share/home/xiasj/01_biosoft/miniconda3/envs/bulk_rnaseq"
+    fastp_env: "/public3/home/scg8747/02_software/anaconda3/envs/bulk_rnaseq"
+    java_env: "/share/home/xiasj/01_biosoft/miniconda3/envs/wes_env"
+    
+conda_env:
+    fastp_env: "/public3/home/scg8747/02_software/anaconda3/envs/bulk_rnaseq"
+    java_env: "/public3/home/scg8747/02_software/anaconda3/envs/bulk_rnaseq"
+    samtools_env: "/public3/home/scg8747/02_software/anaconda3/envs/samtools"
+########################################################
+#################### run setting #######################
+########################################################
+run_para:
+    data_dir: "/public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/00_rawdata/"
+    fastq_suffix: ".fastq.gz"
+
+
+########################################################
+#################### software setting ##################
+########################################################
+fastqc_para:
+    threads: 2
+
+fastp_para:
+    quality: 
+    filt_read_length: 45
+    thread: 1
+## filt_read_length: reads shorter than length_required will be discarded, default is 15. (int [=15])
+
+samtools_para:
+    thread: 4 
+    
+hisat2_para:
+    index: "/public3/home/scg8747/04_ref/bulk_rnaseq/mus/hisat2_index/Mus_musculus_GRCm39_dna_primary_assembly_hisat2.index"
+    threads: 4
+
+featureCounts_para:
+    ref_file: "/public3/home/scg8747/04_ref/bulk_rnaseq/mus/Mus_musculus.GRCm39.109.gtf"
+    threads: 4
+    feature_name: "exon"
+    meta_feature: "gene_id"
+    MAPQ: 0
+## Exons because that is what the final spliced transcript is composed of. 
+## There is a reason that exon is the default setting in featureCounts.
+## understand the MAPQ value
+## The minimum mapping quality score a read must satisfy in order to be counted
+## https://sequencing.qcfail.com/articles/mapq-values-are-really-useful-but-their-implementation-is-a-mess/
+## https://www.biostars.org/p/427940/
+
+RSeQC_para:
+    bed_file: "/share/home/xiasj/04_ref/rnaseq/human/RSEQC/hg38_GENCODE.v38.bed"
+
+virus_detection_para:
+    subject_databse: "/share/home/xiasj/04_ref/wes/ncbi/virus/Human_ebv_hpv"

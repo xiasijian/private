@@ -1,0 +1,37 @@
+nohup: ignoring input
+Provided cluster nodes: 2
+Job counts:
+	count	jobs
+	1	all
+	12	fastp_filt
+	12	featureCounts_gene
+	12	hisat2_mapped
+	12	samtools_stat
+	12	samtools_to_bam
+	61
+
+rule fastp_filt:
+    input: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/00_rawdata/S40/S40_1.fastq.gz, /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/00_rawdata/S40/S40_2.fastq.gz
+    output: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/output/S40_R1_filt.fq.gz, /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/output/S40_R2_filt.fq.gz, /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/output/S40_filt_fastp.json
+    log: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/log/S40fastp_filt.log
+    jobid: 8
+    wildcards: sample=S40
+    threads: 8
+
+/bin/sh: 4: command not found
+Error submitting jobscript (exit code 127):
+
+
+rule fastp_filt:
+    input: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/00_rawdata/S11/S11_1.fastq.gz, /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/00_rawdata/S11/S11_2.fastq.gz
+    output: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/output/S11_R1_filt.fq.gz, /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/output/S11_R2_filt.fq.gz, /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/output/S11_filt_fastp.json
+    log: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/02_fastp_filt/log/S11fastp_filt.log
+    jobid: 1
+    wildcards: sample=S11
+    threads: 8
+
+/bin/sh: 4: command not found
+Error submitting jobscript (exit code 127):
+
+Will exit after finishing currently running jobs.
+Exiting because a job execution failed. Look above for error message

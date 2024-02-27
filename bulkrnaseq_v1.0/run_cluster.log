@@ -1,0 +1,34 @@
+nohup: ignoring input
+Provided cluster nodes: 2
+Job counts:
+	count	jobs
+	1	all
+	12	htseq_count
+	13
+
+rule htseq_count:
+    input: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/05_samtools/output/S11_filt_sorted.bam
+    output: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/08_htseq_count/output/S11_htseq_count_gene_output.txt
+    log: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/08_htseq_count/log/S11_filt_htseq_count_gene.log
+    jobid: 17
+    wildcards: sample=S11
+    threads: 4
+
+
+rule htseq_count:
+    input: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/05_samtools/output/S40_filt_sorted.bam
+    output: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/08_htseq_count/output/S40_htseq_count_gene_output.txt
+    log: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/08_htseq_count/log/S40_filt_htseq_count_gene.log
+    jobid: 47
+    wildcards: sample=S40
+    threads: 4
+
+Error in job htseq_count while creating output file /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/08_htseq_count/output/S11_htseq_count_gene_output.txt.
+ClusterJobException in line 5 of /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/rules/08_htseq-count.py:
+Error executing rule htseq_count on cluster (jobid: 17, external: Submitted batch job 7150378, jobscript: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/.snakemake/tmp.kmfyv0i5/snakejob.htseq_count.17.sh). For detailed error see the cluster log.
+Will exit after finishing currently running jobs.
+Error in job htseq_count while creating output file /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/output/08_htseq_count/output/S40_htseq_count_gene_output.txt.
+ClusterJobException in line 5 of /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/rules/08_htseq-count.py:
+Error executing rule htseq_count on cluster (jobid: 47, external: Submitted batch job 7150379, jobscript: /public3/home/scg8747/03_project/hosipital301/bulk_rnaseq/01_analysis/bulk_rnaseq_snakemake/.snakemake/tmp.kmfyv0i5/snakejob.htseq_count.47.sh). For detailed error see the cluster log.
+Will exit after finishing currently running jobs.
+Exiting because a job execution failed. Look above for error message
