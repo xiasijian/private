@@ -1,0 +1,3 @@
+max-G4-0h-Dpnll-rep2
+max-G4-24h-Dpnll-rep2
+spi1-ko2-0h-Dpnll
